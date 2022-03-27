@@ -55,37 +55,54 @@ class _HomePageState extends State<HomePage> {
           LugaresPage(),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: opcion,
+      bottomNavigationBar: _CustomNavigationBar(
+        opcion: opcion,
         onTap: (int index) {
           setState(() {
             opcion = index;
           });
-          // pageCtrl.jumpToPage(index);
           pageCtrl.animateToPage(index,
               duration: Duration(milliseconds: 200), curve: Curves.easeIn);
         },
-        backgroundColor: ColorTheme.PRIMARY,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: ColorTheme.SECONDARY,
-        iconSize: 28,
-        items: [
-          BottomNavigationBarItem(
-            label: "GPS",
-            icon: Icon(Icons.location_on_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: "Pets",
-            icon: Icon(Icons.pets_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: "Lugares",
-            icon: Icon(Icons.location_city_outlined),
-          ),
-        ],
       ),
+    );
+  }
+}
+
+class _CustomNavigationBar extends StatelessWidget {
+  const _CustomNavigationBar({
+    required this.opcion,
+    required this.onTap,
+  });
+
+  final int opcion;
+  final Function(int) onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: opcion,
+      onTap: onTap,
+      backgroundColor: ColorTheme.PRIMARY,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+      unselectedItemColor: Colors.white,
+      selectedItemColor: ColorTheme.SECONDARY,
+      iconSize: 28,
+      items: [
+        BottomNavigationBarItem(
+          label: "GPS",
+          icon: Icon(Icons.location_on_outlined),
+        ),
+        BottomNavigationBarItem(
+          label: "Pets",
+          icon: Icon(Icons.pets_outlined),
+        ),
+        BottomNavigationBarItem(
+          label: "Lugares",
+          icon: Icon(Icons.location_city_outlined),
+        ),
+      ],
     );
   }
 }
